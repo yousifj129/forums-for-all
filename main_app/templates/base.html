@@ -1,10 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forums For All</title>
+    <link rel="stylesheet" href="{% static 'main.css'%}" />
+    {% block head %}
+      
+    {% endblock head %}
   </head>
+  <nav>
+    <a href="{% url 'homepage' %}">home</a>
+    <a href="{% url 'forums-list' %}">All Forums</a>
+
+  </nav>
   <body>
     {% block content %} 
     

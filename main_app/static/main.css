@@ -1,0 +1,66 @@
+body{
+    font-family: cursive;
+    margin: 0; 
+    padding: 0;
+    text-align: center;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    gap: 10px;
+
+}
+nav a{
+    display: flex;
+    font-size: large;
+    color: wheat;
+    border: 2px wheat solid;
+    width: 200px;
+    height: 50px;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    
+}
+ol{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    border: 2px white solid;
+}
+li{
+    width: 100px;
+
+}
+nav form button, nav form input[type=submit]{
+    font-size: large;
+    color: wheat;
+    border: 2px wheat solid;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    background-color: transparent;    
+}
+
+form button, form input[type=submit]{
+    font-size: large;
+    color: rgb(0, 0, 0);
+    border: 2px rgb(0, 0, 0) solid;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    background-color: transparent;    
+}
+
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}

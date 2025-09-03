@@ -1,0 +1,30 @@
+.forum-preview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration-style: none;
+    text-decoration: none;
+    width: 500px;
+    border: 2px solid black;
+    border-radius: 10px;
+    justify-self: center;
+    padding: 20px;
+    margin-top: 10px;
+}
+.forum-preview h3, .forum-preview p{
+    color: black;
+    
+}
+.forum-preview img{
+    width: 100%;
+    border-radius: 10px;
+}
+.forum-top{
+    display: flex;
+    gap: 10px;
+}
+p{
+    align-self: flex-start;
+    text-align: justify;
+}
