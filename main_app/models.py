@@ -16,45 +16,46 @@ class User(AbstractUser):
         # default=Role.CUSTOMER,
         null=True
     )
+    
 
 
-class Forum():
+class Forum(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='forums')
     title = models.CharField(max_length=200)
     content = models.CharField(max_length=10000)
 # https://stackoverflow.com/questions/74706092/django-imagefield-with-multiple-images
-class Attachment():
+class Attachment(models.Model):
     class AttachmentType(models.TextChoices):
-        PHOTO = "Photo", _("Photo")
-        VIDEO = "Video", _("Video")
+        PHOTO = "photo", "Photo"
+        VIDEO = "video", "Video"
 
     file = models.ImageField('Attachment', upload_to='attachments/')
     file_type = models.CharField('File type', choices=AttachmentType.choices, max_length=10)
 
-    publication = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name="attachments")
+    forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name="attachments")
 
-    class Meta:
-        verbose_name = 'Attachment'
-        verbose_name_plural = 'Attachments'
-class Comment():
-    commenter = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name='comments')
+class Comment(models.Model):
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name='comments')
     content = models.CharField(max_length=1000)
+    created = models.DateTimeField(auto_now_add=True)
+
 
 # https://stackoverflow.com/questions/62879957/how-to-implement-a-like-system-in-django-templates
-class Upvote():
+class Upvote(models.Model):
     forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name='upvotes')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='upvotes')
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['user', 'post'], name="unique_upvote"),
+            models.UniqueConstraint(fields=['user', 'forum'], name="unique_upvote"),
         ]
 
-class Downvote():
+class Downvote(models.Model):
     forum = models.ForeignKey(Forum, on_delete=models.CASCADE, related_name='downvotes')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='downvotes')
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['user', 'post'], name="unique_downvote"),
+            models.UniqueConstraint(fields=['user', 'forum'], name="unique_downvote"),
         ]
