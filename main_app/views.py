@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
@@ -49,4 +49,25 @@ class ForumCreateView(CreateView):
         print(form)
         return super().form_valid(form)
     
-    
+def forum_create_view(request):
+    if request.method == "POST":
+        form = ForumForm(request.POST)
+        files = request.FILES.getlist("attachments")
+
+        if form.is_valid():
+            forum = form.save(commit=False)
+            forum.creator = request.user
+            forum.save()
+
+            for f in files:
+                Attachment.objects.create(
+                    forum=forum,
+                    file=f,
+                    file_type="photo"  
+                )
+
+            return redirect("forums-list") 
+    else:
+        form = ForumForm()
+
+    return render(request, "forums/forum-create.html", {"form": form})

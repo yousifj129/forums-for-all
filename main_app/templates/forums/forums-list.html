@@ -8,6 +8,7 @@
 {% for forum in forums %}
     <a href="{% url 'forum-details' forum.id%}" class="forum-preview">
         <div class="forum-top">
+            <h4>{{forum.creator.username}}</h4>
             <h4>{{forum.created.date}}</h4>
             <h3>{{forum.title}}</h3>
         </div>

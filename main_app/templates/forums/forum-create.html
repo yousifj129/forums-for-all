@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Create new forum</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h3>Attachments</h3>
+    <div id="attachments-wrapper">
+        <input type="file" name="attachments" accept="image/*,video/*">
+    </div>
+
+    <br>
+    <button type="button" id="add-more">Add more images</button>
+    <br><br>
+
+    <button type="submit">Create forum</button>
+</form>
+
+<script>
+attachmentCount = 1
+document.getElementById("add-more").addEventListener("click", function() {
+    if(attachmentCount >= 3){
+        return;
+    }
+    attachmentCount += 1;
+    const wrapper = document.getElementById("attachments-wrapper");
+    const input = document.createElement("input");
+    input.type = "file";
+    input.name = "attachments";
+    input.accept = "image/*,video/*";
+    wrapper.appendChild(document.createElement("br"));
+    wrapper.appendChild(input);
+});
+</script>
+{% endblock %}

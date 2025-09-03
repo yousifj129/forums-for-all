@@ -123,7 +123,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = ""       # after successful login
+LOGIN_REDIRECT_URL = "forums-list"       # after successful login
 LOGOUT_REDIRECT_URL = "login"     # after logout
 
 MEDIA_URL = "/attachments/"

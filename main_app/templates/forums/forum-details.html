@@ -3,4 +3,7 @@
 {% block content %}
 <h1>Forum!</h1>
 {{forum.id}}
+{% for attachment in forum.attachments.all %}
+    <img src="{{attachment.file.url}}" alt="">
+{% endfor %}
 {% endblock content %}
