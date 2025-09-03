@@ -17,6 +17,8 @@ class User(AbstractUser):
         null=True
     )
     
+    icon = models.ImageField('Icon', upload_to='attachments/', default="attachments/6522516.png")
+    
 
 
 class Forum(models.Model):
