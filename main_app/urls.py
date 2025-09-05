@@ -8,5 +8,7 @@ urlpatterns = [
     path("forums/forum-create", views.forum_create_view, name="forum-create"),
 
     path("forums/forum-details/<int:pk>", views.ForumDetailView.as_view(), name="forum-details"),
+    path("forums/forum-upvote/<int:pk>", views.forum_upvote_view, name="forum-upvote"),
+
 
 ]

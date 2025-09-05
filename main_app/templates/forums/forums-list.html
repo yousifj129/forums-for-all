@@ -1,19 +1,29 @@
-{% extends "base.html" %}
-{% load static %}
-{% block head %}
-    <link rel="stylesheet" href="{% static 'forum-list.css'%}" />
-{% endblock head %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'forum-list.css'%}" />
+{% endblock head %} {% block content %}
 <h1>Forums!</h1>
 {% for forum in forums %}
-    <a href="{% url 'forum-details' forum.id%}" class="forum-preview">
-        <div class="forum-top">
-            <h4>{{forum.creator.username}}</h4>
-            <h4>{{forum.created.date}}</h4>
-            <h3>{{forum.title}}</h3>
-        </div>
-        <p>{{forum.content}}</p>
-        <img src="{{forum.attachments.all.0.file.url}}" alt="">
-    </a>
-{% endfor %}
-{% endblock content %}
+<div class="forum-preview">
+  <a href="{% url 'forum-details' forum.id%}">
+    <div class="forum-top">
+      <h4>{{forum.creator.username}}</h4>
+      <h4>{{forum.created.date}}</h4>
+      <h3>{{forum.title}}</h3>
+    </div>
+    <p>{{forum.content}}</p>
+    <img src="{{forum.attachments.all.0.file.url}}" alt="" />
+
+    <div id="forum-bottom">
+      <a href="{% url 'forum-details' forum.id%}">
+        ⬆️{{forum.upvotes.all|length}}
+      </a>
+      <a href="{% url 'forum-details' forum.id%}">
+        ⬇️{{forum.downvotes.all|length}}
+      </a>
+      <a href="{% url 'forum-details' forum.id%}">💬 {{forum.comments.all|length}}
+      </a>
+    </div>
+  </a>
+</div>
+
+{% endfor %} {% endblock content %}

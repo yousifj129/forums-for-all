@@ -71,3 +71,15 @@ def forum_create_view(request):
         form = ForumForm()
 
     return render(request, "forums/forum-create.html", {"form": form})
+
+
+def forum_upvote_view(request, pk):
+    forum = Forum.objects.get(pk=pk)
+    if request.method == "POST":
+        try:
+            new_upvote = Upvote.objects.create(forum=forum, user=request.user)
+        except:
+            Upvote.objects.get(forum=forum, user=request.user).delete()
+
+
+    return redirect(reverse('forum-details',kwargs={'pk':forum.pk}))

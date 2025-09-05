@@ -6,4 +6,19 @@
 {% for attachment in forum.attachments.all %}
     <img src="{{attachment.file.url}}" alt="">
 {% endfor %}
+<div id="forum-bottom">
+      <form action="{% url 'forum-upvote' forum.id%}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="{{forum.upvotes.all|length}}⬆️" />
+      </form>
+      |
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="{{forum.downvotes.all|length}}⬇️" />
+      </form>
+      |
+      <a href="{% url 'forum-details' forum.id%}"
+        >💬 {{forum.comments.all|length}}
+      </a>
+    </div>
 {% endblock content %}
