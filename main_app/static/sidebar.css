@@ -1,0 +1,29 @@
+.sidebar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 85vh;
+    width: 250px;
+    border-right: 1px solid #cccccc;
+    margin-right: 40px;
+}
+
+.sidebar a {
+    display: flex;
+    font-size: large;
+    color: #000;
+    height: 50px;
+    width: 200px;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    padding: 0 10px;
+    border-radius: 100px;
+    transition: ease-in-out 0.2s;
+    margin-top: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #f6f8f9;
+
+}

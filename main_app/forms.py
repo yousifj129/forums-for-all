@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import models
 from django.forms import modelformset_factory
 
-from .models import User, Forum,Attachment
+from .models import User, Forum, Comment
 class UserSignUpForm(UserCreationForm):
     icon = forms.ImageField()
     class Meta:
@@ -14,6 +14,15 @@ class ForumForm(forms.ModelForm):
     class Meta:
         model = Forum
         fields = ["title", "content"]
+        # https://www.geeksforgeeks.org/python/django-form-field-custom-widgets/
+        widgets = {
+            "content": forms.Textarea()
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["content"]
         # https://www.geeksforgeeks.org/python/django-form-field-custom-widgets/
         widgets = {
             "content": forms.Textarea()

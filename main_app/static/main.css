@@ -33,8 +33,13 @@ img {
     overflow-clip-margin: content-box;
     overflow: clip;
 }
-.logotext{
-    height: 50px;
-    justify-self: flex-end;
-    float: left;
+
+.content-holder{
+ display: flex;
+ width: 100%;
+ /* justify-content: space-between; */
+}
+
+.content{
+    justify-content: center;
 }

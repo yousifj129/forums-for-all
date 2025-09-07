@@ -1,7 +1,6 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'forum-list.css'%}" />
 {% endblock head %} {% block content %}
-<h1>Forums!</h1>
 {% for forum in forums %}
 <div class="forum-preview">
   <a href="{% url 'forum-details' forum.id%}">

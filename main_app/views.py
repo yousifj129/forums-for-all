@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 # Create your views here.
 from django.urls import reverse_lazy, reverse
 from django.views.generic import FormView, TemplateView, CreateView, ListView,DetailView, UpdateView
-from .forms import UserSignUpForm, ForumForm
+from .forms import UserSignUpForm, ForumForm, CommentForm
 from .models import *
 class SignUpView(CreateView):
     template_name = "registration/signup.html"
@@ -28,6 +28,11 @@ class ForumDetailView(DetailView):
     model = Forum
     template_name = "forums/forum-details.html"
     context_object_name = "forum"
+    def get_context_data(self, **kwargs) -> dict[str]:
+        context = super().get_context_data(**kwargs)
+        context["form"] = CommentForm()
+        return context
+    
    
     
 class ForumCreateView(CreateView):
@@ -77,9 +82,42 @@ def forum_upvote_view(request, pk):
     forum = Forum.objects.get(pk=pk)
     if request.method == "POST":
         try:
-            new_upvote = Upvote.objects.create(forum=forum, user=request.user)
+            Upvote.objects.create(forum=forum, user=request.user)
+            try:
+                Downvote.objects.get(forum=forum, user=request.user).delete()
+            except:
+                pass
         except:
             Upvote.objects.get(forum=forum, user=request.user).delete()
 
 
     return redirect(reverse('forum-details',kwargs={'pk':forum.pk}))
+
+def forum_downvote_view(request, pk):
+    forum = Forum.objects.get(pk=pk)
+    if request.method == "POST":
+        try:
+            downvote = Downvote.objects.create(forum=forum, user=request.user)
+            try:
+                Upvote.objects.get(forum=forum, user=request.user).delete()
+            except:
+                pass
+        except:
+            Downvote.objects.get(forum=forum, user=request.user).delete()
+
+
+    return redirect(reverse('forum-details',kwargs={'pk':forum.pk}))
+
+def forum_comment_view(request, pk):
+    if request.method == "POST":
+        forum = Forum.objects.get(pk=pk)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.commenter = request.user
+            comment.forum = forum
+            comment.save()
+            return redirect(reverse('forum-details',kwargs={'pk':forum.pk}))
+    else:
+        form = CommentForm()
+    return render(request, "forums/forum-create.html", {"form": form})

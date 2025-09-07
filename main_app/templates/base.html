@@ -7,6 +7,7 @@
     <title>Forums For All</title>
     <link rel="stylesheet" href="{% static 'main.css'%}" />
     <link rel="stylesheet" href="{% static 'navbar.css'%}" />
+    <link rel="stylesheet" href="{% static 'sidebar.css'%}" />
 
     <link rel="shortcut icon" href="{% static 'logozoom transparent light.png' %}" type="image/x-icon">
     {% block head %} {% endblock head %}
@@ -14,22 +15,37 @@
   
   <body>
     <nav>
-      <a href="{% url 'forums-list' %}">
-              <img src="{% static 'logotext transparent light.png' %}" class='logotext'>
-      </a>
-    <a href="{% url 'homepage' %}">home</a>
-    <a href="{% url 'forums-list' %}">All Forums</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'forum-create'%}">Create Forum</a>
-    <form action="/auth/logout/" method="post">
-      {% csrf_token %}
-      <button>Logout</button>
-    </form>
-    {% else %}
-    <a href="{% url 'login' %}">Login</a>|
-    <a href="{% url 'signup' %}">Sign up</a>
-    {% endif %}
+      <div class="navleft">
+        <a href="{% url 'forums-list' %}">
+                <img src="{% static 'logotext transparent.png' %}" class='logotext'>
+        </a>
+      </div>
+      <div class="navmid">
+        <input type="text" name="search" id="search" placeholder="🔍 Search"/>
+      </div>
+      <div class="navright">
+        {% if user.is_authenticated %}
+        <a href="{% url 'forum-create'%}">+ Create</a>
+        <form action="/auth/logout/" method="post">
+          {% csrf_token %}
+          <button>Logout</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>|
+        <a href="{% url 'signup' %}">Sign up</a>
+        {% endif %}
+      </div>
   </nav>
-    {% block content %} {% endblock content %}
+  <div class="content-holder">
+    <div class="sidebar">
+      <a href="{% url 'homepage' %}">🏠 Home</a>
+      <a href="{% url 'forum-create'%}">➕ Create</a>
+
+    </div>
+    <div class="content"> 
+            {% block content %} {% endblock content %}
+    </div>
+  </div>
+  
   </body>
 </html>
