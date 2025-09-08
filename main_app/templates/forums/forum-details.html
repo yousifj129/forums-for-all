@@ -1,41 +1,49 @@
-{% extends "base.html" %}
-{% load static %} 
-{% block head %}
+{% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'forum-details.css'%}" />
-{% endblock head %}
-
-{% block content %}
+{% endblock head %} {% block content %}
 <div class="container">
+  <div id="forum-top">
+    {% if forum.creator == user %}
+    <form action="{% url 'forum-delete' forum.id%}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="Delete" />
+    </form>
+    <a href="{% url 'forum-update' forum.id%}">update forum</a>
+    {% endif %}
+  </div>
+
   <div class="attachments-container">
-    {% for attachment in forum.attachments.all %}
-      <img src="{{attachment.file.url}}" alt="">
-  {% endfor %}
+    <img src="{{forum.attachments.all.0.file.url}}" alt="" class="main-image" />
+    <div class="secondary-images">
+      {% for attachment in forum.attachments.all %} 
+      {% if forloop.counter0 != 0%}
+      <img src="{{attachment.file.url}}" alt="" class="secondary-image" />
+      {% endif %} 
+      {% endfor %}
+    </div>
   </div>
   <div id="forum-bottom">
-        <form action="{% url 'forum-upvote' forum.id%}" method="post">
-          {% csrf_token %}
-          <input type="submit" value="{{forum.upvotes.all|length}}⬆️" />
-        </form>
-        |
-        <form action="{% url 'forum-downvote' forum.id%}" method="post">
-          {% csrf_token %}
-          <input type="submit" value="{{forum.downvotes.all|length}}⬇️" />
-        </form>
-        |
-        <a href="{% url 'forum-details' forum.id%}"
-          >💬 {{forum.comments.all|length}}
-        </a>
-      </div>
-      <form action="{% url 'forum-comment' forum.id%}" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="comment">
-      </form>
-      {% for comment in forum.comments.all %}
-        <div>
-          <h3>{{comment.commenter}}</h3>
-          <p>{{comment.content}}</p>
-        </div>
-      {% endfor %}
+    <form action="{% url 'forum-upvote' forum.id%}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="{{forum.upvotes.all|length}}⬆️" />
+    </form>
+    <form action="{% url 'forum-downvote' forum.id%}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="{{forum.downvotes.all|length}}⬇️" />
+    </form>
+    <a href="#comments">💬 {{forum.comments.all|length}} </a>
+  </div>
+  <form action="{% url 'forum-comment' forum.id%}" method="post">
+    {% csrf_token %} {{form.as_p}}
+    <input type="submit" value="comment" />
+  </form>
+  <div id="comments">
+    {% for comment in forum.comments.all %}
+    <div>
+      <h3>{{comment.commenter}}</h3>
+      <p>{{comment.content}}</p>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock content %}

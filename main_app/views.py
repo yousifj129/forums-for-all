@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
-from django.views.generic import FormView, TemplateView, CreateView, ListView,DetailView, UpdateView
+from django.views.generic import FormView, TemplateView, CreateView, ListView,DetailView, UpdateView,DeleteView
 from .forms import UserSignUpForm, ForumForm, CommentForm
 from .models import *
 class SignUpView(CreateView):
@@ -33,8 +33,19 @@ class ForumDetailView(DetailView):
         context["form"] = CommentForm()
         return context
     
-   
-    
+class ForumDeleteView(DeleteView):
+    model = Forum
+    def get_success_url(self):
+        return reverse("forums-list")    
+
+class ForumUpdateView(UpdateView):
+    model = Forum
+    template_name = "forums/forum-update.html"
+    form_class = ForumForm
+
+    def get_success_url(self):
+        return reverse("forum-details", kwargs={"pk": self.object.pk})
+
 class ForumCreateView(CreateView):
     model = Forum
     template_name = "forums/forums-form.html"

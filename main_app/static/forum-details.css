@@ -4,3 +4,41 @@
 .attachments-container img{
     width: 200px;
 }
+
+form button, form input[type=submit], .container a{
+    font-size: large; 
+    background-color: transparent;
+    border:none;
+    color: black;
+    text-decoration: none;
+}
+
+form button:hover, form input[type=submit]:hover, .container a:hover{
+background-color: aliceblue;
+}
+
+#forum-top{
+    display: flex;
+}
+#forum-bottom{
+    display: flex;
+}
+
+.attachments-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.attachments-container .secondary-images{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.secondary-images .secondary-image{
+    height: min-content;
+    border-radius: 20px;
+}
+.attachments-container .main-image{
+    width: 100%;
+    border-radius: 20px;
+}

@@ -18,17 +18,6 @@ li{
 
 }
 
-form button, form input[type=submit]{
-    font-size: large;
-    color: rgb(0, 0, 0);
-    border: 2px rgb(0, 0, 0) solid;
-    width: 200px;
-    height: 50px;
-    text-align: center;
-    background-color: transparent;    
-}
-
-
 img {
     overflow-clip-margin: content-box;
     overflow: clip;
@@ -42,4 +31,13 @@ img {
 
 .content{
     justify-content: center;
+    /* position: relative;
+    z-index: -1;
+    left: 280px;
+    top: 120px; */
+}
+
+a{
+    /* filter: grayscale(100%) contrast(150%); */
+
 }

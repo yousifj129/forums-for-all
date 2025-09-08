@@ -6,6 +6,7 @@ nav {
     width: 100%;
     background-color: #fff;
     border-bottom: 1px solid #cccccc;
+    /* position: fixed; */
 }
 
 nav a {
@@ -66,5 +67,11 @@ nav a:hover {
     padding: 8px 12px;
     font-size: 16px;
     border-radius: 100px;
+    border: 0.1px solid #cccccc;
     background-color: #dbe4e9;
+}
+.navmid input[type="text"]:focus{
+    outline: none;
+    border: 0.2px solid #009dff;
+    background-color: white;
 }
