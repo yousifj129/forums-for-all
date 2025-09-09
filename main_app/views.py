@@ -1,3 +1,4 @@
+from operator import itemgetter
 from django.shortcuts import render,redirect
 
 # Create your views here.
@@ -29,13 +30,22 @@ class ForumListView(ListView):
             queryset = queryset.filter(content__icontains=search)
         if category:
             queryset = queryset.filter(category__icontains=category)
- 
+        
 
         return queryset
 
     def get_context_data(self, **kwargs) -> dict[str]:
         context = super(ForumListView, self).get_context_data(**kwargs)
-        print(**kwargs)
+        unique_values = Forum.objects.values_list('category', flat=True).distinct()
+        all_categories = []
+        for value in unique_values:
+            count = Forum.objects.filter(category=value).count()
+            all_categories.append({
+                "category":value,
+                "count":count
+            })
+        newlist = sorted(all_categories, key=lambda d: d['count'], reverse=True)
+        context["categories"] = newlist
         return context
     
 
