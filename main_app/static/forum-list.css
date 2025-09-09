@@ -96,12 +96,15 @@ p {
     width: 100%;
     justify-self: center;
 }
+.best-categories h3{
+    margin: 0px;
+}
 .best-categories a{
     text-decoration-style: none;
     text-decoration: none;
     color: black;
-    margin: 5px;
-    padding: 10px;
+    margin: 0px 5px 0px 5px;
+    padding: 10px 10px 10px 10px;
     border-radius: 20px;
 }
 .best-categories a:hover{

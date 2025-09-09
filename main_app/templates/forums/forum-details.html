@@ -11,7 +11,7 @@
     <a href="{% url 'forum-update' forum.id%}">update forum</a>
     {% endif %}
   </div>
-  <a href="{% url 'user-profile' forum.creator.id%}">
+  <a href="{% url 'user-profile' forum.creator.id%}" style="padding:0px;">
     <div class="user-profile">
       <img
         src="{{forum.creator.icon.url}}"
