@@ -1,9 +1,14 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'forum-list.css'%}" />
 {% endblock head %} {% block content %}
-{% for category in categories %}
-<a href="/forums/forums-list?category={{category.category}}">{{category.category}}:{{category.count}}</a>
-{% endfor %}
+<div class="best-categories">
+  <h3>best categories</h3>
+  <div style="display:flex; justify-content:center; flex-wrap:wrap;">
+    {% for category in categories %}
+    <a href="/forums/forums-list?category={{category.category}}">{{category.category}}:{{category.count}}</a>
+    {% endfor %}
+  </div>
+</div>
 {% for forum in forums reversed  %}
 <div class="forum-preview">
   <a href="{% url 'forum-details' forum.id%}">

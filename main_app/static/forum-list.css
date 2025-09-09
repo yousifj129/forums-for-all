@@ -30,7 +30,7 @@ white-space: nowrap; /* Prevents text from wrapping to the next line */
     text-decoration-style: none;
     text-decoration: none;
     width: 100%;
-
+    color: black;
 }
 
 
@@ -85,4 +85,26 @@ p {
 
 #forum-bottom input:hover {
     cursor: pointer;
+}
+.best-categories{
+    border: 1px solid #cccccc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 10px 0.5px #cccccc;
+    padding: 25px 20px 25px 20px;
+    border-radius: 10px;
+    width: 100%;
+    justify-self: center;
+}
+.best-categories a{
+    text-decoration-style: none;
+    text-decoration: none;
+    color: black;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 20px;
+}
+.best-categories a:hover{
+    background-color:rgb(243, 243, 243);
+
 }

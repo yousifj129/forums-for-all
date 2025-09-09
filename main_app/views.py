@@ -36,7 +36,7 @@ class ForumListView(ListView):
 
     def get_context_data(self, **kwargs) -> dict[str]:
         context = super(ForumListView, self).get_context_data(**kwargs)
-        unique_values = Forum.objects.values_list('category', flat=True).distinct()
+        unique_values = Forum.objects.values_list('category', flat=True).distinct()[:5]
         all_categories = []
         for value in unique_values:
             count = Forum.objects.filter(category=value).count()
