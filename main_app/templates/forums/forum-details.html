@@ -3,18 +3,26 @@
 {% endblock head %} {% block content %}
 <div class="container">
   <div id="forum-top">
-    {% if forum.creator == user or forum.creator.role == "Admin" %}
+    {% if forum.creator == user or user.role == user.role.ADMIN %}
     <form action="{% url 'forum-delete' forum.id%}" method="post">
       {% csrf_token %}
       <input type="submit" value="Delete" />
     </form>
     <a href="{% url 'forum-update' forum.id%}">update forum</a>
     {% endif %}
-    <a  href="{% url 'user-profile' forum.creator.id%}">creator: {{forum.creator}}</a>
   </div>
+  <a  href="{% url 'user-profile' forum.creator.id%}">
+    <div class="user-profile">
+    <img src="{{forum.creator.icon.url}}" alt="profile picture" style="width: 50px; height:50px;">
+    <h2>{{forum.creator.username}}</h2>
+    </div>
+  </a>
+  {% if forum.category %}
+    <a href="/forums/forums-list?category={{forum.category}}">category: {{forum.category}}</a>
+  {% endif %}
   <h2>{{forum.title}}</h2>
   <p>{{forum.content}}</p>
-
+  {% if forum.attachments.all %}
   <div class="attachments-container">
     <img src="{{forum.attachments.all.0.file.url}}" alt="" class="main-image" />
     <div class="secondary-images">
@@ -25,6 +33,7 @@
       {% endfor %}
     </div>
   </div>
+  {% endif %}
   <div id="forum-bottom">
     <div id="up-and-down-vote">
       <form action="{% url 'forum-upvote' forum.id%}" method="post">
@@ -46,18 +55,22 @@
     {% csrf_token %} {{form.as_p}}
     <input type="submit" value="comment" />
   </form>
+  {% if forum.comments.all %}
   <div id="comments">
     {% for comment in forum.comments.all reversed %}
     <div class="comment">
-      <a class="user-link" href="">
-        <img src="{{comment.commenter.icon.url}}" alt="" class="icon" />
-        <h3>{{comment.commenter}}</h3>
-      </a>
+        <a  href="{% url 'user-profile' forum.creator.id%}">
+    <div class="user-profile" style="padding: 0px 10px 0px 10px">
+    <img src="{{forum.creator.icon.url}}" alt="profile picture" style="width: 50px; height:50px;">
+    <h2>{{forum.creator.username}}</h2>
+    </div>
+  </a>
       <p>{{comment.content}}</p>
       <hr>
     </div>
     
     {% endfor %}
   </div>
+  {% endif %}
 </div>
 {% endblock content %}

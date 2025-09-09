@@ -13,7 +13,7 @@ class UserSignUpForm(UserCreationForm):
 class ForumForm(forms.ModelForm):
     class Meta:
         model = Forum
-        fields = ["title", "content"]
+        fields = ["title", "content", "category"]
         # https://www.geeksforgeeks.org/python/django-form-field-custom-widgets/
         widgets = {
             "content": forms.Textarea()

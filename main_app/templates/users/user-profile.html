@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'forum-list.css'%}" />
 {% endblock head %} {% block content %}
 <div class="user-profile">
-    <img src="{{viewed_user.icon}}" alt="profile picture">
+    <img src="{{viewed_user.icon.url}}" alt="profile picture">
     <h2>{{viewed_user.username}}</h2>
 </div>
 {% for forum in forums reversed  %}
@@ -28,5 +28,7 @@
     </div>
   </a>
 </div>
+<style>
 
+</style>
 {% endfor %} {% endblock content %}

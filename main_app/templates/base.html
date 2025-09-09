@@ -21,11 +21,14 @@
         </a>
       </div>
       <div class="navmid">
-        <input type="text" name="search" id="search" placeholder="🔍 Search"/>
+        <input type="text" name="search" id="search" placeholder="🔍 Search" onchange="search()"/>
       </div>
       <div class="navright">
         {% if user.is_authenticated %}
         <a href="{% url 'forum-create'%}">+ Create</a>
+        <a href="{% url 'user-profile' user.id%}">
+            <img src="{{user.icon.url}}" alt="profile picture" class="icon">
+        </a>
         <form action="/auth/logout/" method="post">
           {% csrf_token %}
           <button>Logout</button>
@@ -48,4 +51,23 @@
   </div>
   
   </body>
+  <script>
+    function search(){
+      console.log("haha")
+      const searchQuery = document.getElementById("search").value
+      window.location.replace(`/forums/forums-list?search=${searchQuery}`);
+
+    }
+    let scrollYPosition = localStorage.getItem(`${document.URL}-scroll`);
+    if (!scrollYPosition) {
+        scrollYPosition = 0;
+    }
+    window.addEventListener("DOMContentLoaded", () => {
+        window.scrollTo(0, scrollYPosition);
+    });
+    window.addEventListener("beforeunload", () => {
+        scrollYPosition = window.scrollY;
+        localStorage.setItem(`${document.URL}-scroll`, scrollYPosition);
+    });
+</script>
 </html>

@@ -78,6 +78,7 @@ p {
     width: fit-content;
     text-decoration: none;
     text-decoration-style: none;
+    color: black;
     border-radius: 10px;
 
 }
