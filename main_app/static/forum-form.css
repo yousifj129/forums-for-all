@@ -1,0 +1,46 @@
+.content{
+      box-shadow: 0px 0px 5px 0.5px #cccccc;
+border-radius: 10px;
+margin-top: 10px;
+padding: 10px;
+}
+.main-form {
+  max-width: 450px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.main-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.main-form input[type="text"],
+.main-form input[type="email"],
+.main-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding doesn't add to the width */
+}
+
+.main-form input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.main-form input[type="submit"]:hover {
+  background-color: #0056b3;
+}

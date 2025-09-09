@@ -33,6 +33,16 @@ class ForumDetailView(DetailView):
         context["form"] = CommentForm()
         return context
     
+class UserForumsListView(ListView):
+    model = Forum
+    template_name = "users/user-profile.html"
+    def get_context_data(self, **kwargs) -> dict[str]:
+        context = super().get_context_data(**kwargs)
+        context["viewed_user"] = User.objects.get(pk=self.kwargs['pk'])
+        context["forums"] = Forum.objects.filter(creator=self.kwargs['pk'])
+        return context
+    
+
 class ForumDeleteView(DeleteView):
     model = Forum
     def get_success_url(self):

@@ -3,14 +3,17 @@
 {% endblock head %} {% block content %}
 <div class="container">
   <div id="forum-top">
-    {% if forum.creator == user %}
+    {% if forum.creator == user or forum.creator.role == "Admin" %}
     <form action="{% url 'forum-delete' forum.id%}" method="post">
       {% csrf_token %}
       <input type="submit" value="Delete" />
     </form>
     <a href="{% url 'forum-update' forum.id%}">update forum</a>
     {% endif %}
+    <a  href="{% url 'user-profile' forum.creator.id%}">creator: {{forum.creator}}</a>
   </div>
+  <h2>{{forum.title}}</h2>
+  <p>{{forum.content}}</p>
 
   <div class="attachments-container">
     <img src="{{forum.attachments.all.0.file.url}}" alt="" class="main-image" />
@@ -18,31 +21,42 @@
       {% for attachment in forum.attachments.all %} 
       {% if forloop.counter0 != 0%}
       <img src="{{attachment.file.url}}" alt="" class="secondary-image" />
-      {% endif %} 
+      {% endif %}
       {% endfor %}
     </div>
   </div>
   <div id="forum-bottom">
-    <form action="{% url 'forum-upvote' forum.id%}" method="post">
-      {% csrf_token %}
-      <input type="submit" value="{{forum.upvotes.all|length}}⬆️" />
-    </form>
-    <form action="{% url 'forum-downvote' forum.id%}" method="post">
-      {% csrf_token %}
-      <input type="submit" value="{{forum.downvotes.all|length}}⬇️" />
-    </form>
-    <a href="#comments">💬 {{forum.comments.all|length}} </a>
+    <div id="up-and-down-vote">
+      <form action="{% url 'forum-upvote' forum.id%}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="{{forum.upvotes.all|length}}⬆️" />
+      </form>
+      <form action="{% url 'forum-downvote' forum.id%}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="{{forum.downvotes.all|length}}⬇️" />
+      </form>
+    </div>
+    <a href="#comments" style="border: 1px solid #1f1f1fff; padding: 2px; border-radius: 25px;">💬 {{forum.comments.all|length}} </a>
   </div>
-  <form action="{% url 'forum-comment' forum.id%}" method="post">
+  <form
+    action="{% url 'forum-comment' forum.id%}"
+    method="post"
+    class="comment-form"
+  >
     {% csrf_token %} {{form.as_p}}
     <input type="submit" value="comment" />
   </form>
   <div id="comments">
-    {% for comment in forum.comments.all %}
-    <div>
-      <h3>{{comment.commenter}}</h3>
+    {% for comment in forum.comments.all reversed %}
+    <div class="comment">
+      <a class="user-link" href="">
+        <img src="{{comment.commenter.icon.url}}" alt="" class="icon" />
+        <h3>{{comment.commenter}}</h3>
+      </a>
       <p>{{comment.content}}</p>
+      <hr>
     </div>
+    
     {% endfor %}
   </div>
 </div>

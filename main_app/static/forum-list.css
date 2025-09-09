@@ -21,7 +21,10 @@
 .forum-preview h3,
 .forum-preview p{
     color: black;
-
+white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden;    /* Hides any content that overflows the element's box */
+  text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate truncated text */
+  max-height: 1000px;
 }
 .forum-preview a{
     text-decoration-style: none;

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% block head %}
+<link rel="stylesheet" href="{% static 'forum-form.css'%}" />
+{% endblock head %} 
 {% block content %}
 <h1>Update forum</h1>
 
-<form method="post">
+<form method="post" class="main-form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Update forum</button>

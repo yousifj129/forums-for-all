@@ -15,5 +15,6 @@ urlpatterns = [
     path("forums/forum-downvote/<int:pk>", views.forum_downvote_view, name="forum-downvote"),
     path("forums/forum-comment/<int:pk>", views.forum_comment_view, name="forum-comment"),
 
+    path("users/profile/<int:pk>", views.UserForumsListView.as_view(), name="user-profile"),
 
 ]

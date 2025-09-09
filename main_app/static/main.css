@@ -35,9 +35,18 @@ img {
     z-index: -1;
     left: 280px;
     top: 120px; */
+    width: 500px;
 }
 
 a{
     /* filter: grayscale(100%) contrast(150%); */
 
+}
+.container{
+    margin-top: 20px;
+}
+.icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
 }
