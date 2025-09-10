@@ -26,6 +26,13 @@ class ForumListView(ListView):
 
         search = self.request.GET.get("search")
         category = self.request.GET.get("category")
+        following = self.request.GET.get("following")
+        if following == "true" and self.request.user.is_authenticated:
+            followed = Follow.objects.filter(follower=self.request.user)
+            followed_users = []
+            for f in followed.all():
+                followed_users.append(f.followed)
+            queryset = queryset.filter(creator__in=followed_users)
         if search:
             queryset = queryset.filter(content__icontains=search)
         if category:
@@ -195,3 +202,16 @@ def forum_comment_view(request, pk):
     else:
         form = CommentForm()
     return render(request, "forums/forum-create.html", {"form": form})
+
+
+def user_follow(request, pk):
+    followed = User.objects.get(pk=pk)
+    if request.user == followed:
+        return redirect(reverse('user-profile',kwargs={'pk':followed.pk}))
+    if request.method == "POST":
+        try:
+            Follow.objects.create(followed=followed, follower=request.user)
+        except:
+            Follow.objects.get(followed=followed, follower=request.user).delete()
+
+    return redirect(reverse('user-profile',kwargs={'pk':followed.pk}))

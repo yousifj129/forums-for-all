@@ -13,6 +13,9 @@
 <div class="forum-preview">
   <a href="{% url 'forum-details' forum.id%}">
     <div class="forum-top">
+      <img src="{{forum.creator.icon.url}}" alt="profile picture" class="icon" style="width: 45px;
+    height: 45px;
+    border-radius: 100%;">
       <h4>{{forum.creator.username}}</h4>
       <h4>{{forum.created.date}}</h4>
       <h3>{{forum.title}}</h3>

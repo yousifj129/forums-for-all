@@ -4,6 +4,18 @@
 <div class="user-profile">
     <img src="{{viewed_user.icon.url}}" alt="profile picture">
     <h2>{{viewed_user.username}}</h2>
+    <h4>{{viewed_user.followed.all|length}} followers</h4>
+    {% if user != viewed_user %}
+      <form action="{% url 'user-follow' viewed_user.id%}" method="post" class="follow-form">
+        {% csrf_token %}
+        {{viewed_user.followed.all.0.username}}
+        {% if user in viewed_user.followed.all %}
+          <input type="submit" value="Unfollow" style="background-color=#cccccc;"/>
+        {% else %}
+          <input type="submit" value="Follow" />
+        {% endif %}
+      </form>
+    {% endif %}
 </div>
 {% for forum in forums reversed  %}
 <div class="forum-preview">
@@ -29,6 +41,9 @@
   </a>
 </div>
 <style>
+  .user-profile{
+    margin-top:10px;
 
+  }
 </style>
 {% endfor %} {% endblock content %}

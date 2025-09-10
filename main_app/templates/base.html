@@ -46,8 +46,10 @@
 
       <a href="{% url 'user-profile' user.id %}">🫵 Your Profile</a>
 
+      <a href="/forums/forums-list?following=true">🫂 Following</a>
       {% endif %}
       <a href="{% url 'forum-categories'%}">🗄️ Categories</a>
+
       <a href="{% url 'forum-create'%}">➕ Create</a>
     </div>
     <div class="content"> 
