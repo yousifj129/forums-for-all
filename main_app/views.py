@@ -48,7 +48,29 @@ class ForumListView(ListView):
         context["categories"] = newlist
         return context
     
+class CategoriesListView(ListView):
+    model = Forum
+    template_name = "forums/forum-categories.html"
+    context_object_name = "forums"
 
+    def get_context_data(self, **kwargs) -> dict[str]:
+        context = super(CategoriesListView, self).get_context_data(**kwargs)
+        unique_values = Forum.objects.values_list('category', flat=True).distinct()[:5]
+        all_categories = []
+        for value in unique_values:
+            count = Forum.objects.filter(category=value).count()
+            all_categories.append({
+                "category":value,
+                "count":count
+            })
+        newlist = sorted(all_categories, key=lambda d: d['count'], reverse=True)
+        context["categories"] = newlist
+        return context
+    
+
+        
+    
+    
         
     
     
