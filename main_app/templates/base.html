@@ -42,11 +42,12 @@
   <div class="content-holder">
     <div class="sidebar">
       <a href="{% url 'forums-list' %}">🏠 Home</a>
-              {% if user.is_authenticated %}
+      {% if user.is_authenticated %}
 
       <a href="{% url 'user-profile' user.id %}">🫵 Your Profile</a>
 
       {% endif %}
+      <a href="{% url 'forum-categories'%}">🗄️ Categories</a>
       <a href="{% url 'forum-create'%}">➕ Create</a>
     </div>
     <div class="content"> 
