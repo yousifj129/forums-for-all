@@ -64,3 +64,12 @@ class Downvote(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['user', 'forum'], name="unique_downvote"),
         ]
+
+class Follow(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
+    followed = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followed')
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['follower', 'followed'], name="unique_follow"),
+        ]
