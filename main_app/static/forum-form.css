@@ -22,25 +22,38 @@ padding: 10px;
 
 .main-form input[type="text"],
 .main-form input[type="email"],
-.main-form textarea {
+.main-form textarea,
+.main-form p input {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box; /* Ensures padding doesn't add to the width */
+  
 }
 
-.main-form input[type="submit"] {
+.main-form input[type="submit"],
+.main-form button {
   background-color: #007bff;
   color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 100%;
   font-size: 16px;
 }
-
-.main-form input[type="submit"]:hover {
+.main-form input[type="submit"]:hover,
+.main-form button:hover  {
   background-color: #0056b3;
+}
+
+input[type=file]{
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  width: 100%;
 }

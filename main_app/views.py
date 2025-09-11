@@ -21,6 +21,7 @@ class ForumListView(ListView):
     model = Forum
     template_name = "forums/forums-list.html"
     context_object_name = "forums"
+    ordering = ['id']
     def get_queryset(self):
         queryset = super().get_queryset() # Get the default queryset
 
