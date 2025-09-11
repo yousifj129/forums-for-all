@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'forum-list.css'%}" />
 {% endblock head %} {% block content %}
-<div class="user-profile">
+<div class="user-profile" style="margin-bottom: 15px">
     <img src="{{viewed_user.icon.url}}" alt="profile picture">
     <h2>{{viewed_user.username}}</h2>
     <h4>{{viewed_user.followed.all|length}} followers</h4>
@@ -15,7 +15,9 @@
           <input type="submit" value="Follow" />
         {% endif %}
       </form>
-    {% endif %}
+
+      {% endif %}
+      <h4>role: {{viewed_user.role}}</h4>
 </div>
 {% for forum in forums reversed  %}
 <div class="forum-preview">

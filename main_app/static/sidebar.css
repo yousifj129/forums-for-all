@@ -29,3 +29,17 @@
     background-color: #f6f8f9;
 
 }
+
+
+.right-content {
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    flex-direction: column;
+    min-height: 85vh;
+    width: 300px;
+    left: 3%;
+    border-left: 1px solid #cccccc;
+    /* margin-top: 100px; */
+    /* position: fixed; */
+}
