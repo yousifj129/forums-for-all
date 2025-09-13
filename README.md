@@ -1,5 +1,5 @@
 # Forums For All
-![Image of the site interface](https://raw.githubusercontent.com/yousifj129/forums-for-all/refs/heads/main/WhatsApp%20Image%202025-09-12%20at%2003.41.50_bc28b77b.jpg)
+![Image of the site interface](https://github.com/yousifj129/forums-for-all/blob/main/thumbnail.jpg?raw=true)
 
 ## Introduction
 This is my 4th and final project in the Software Engineering Bootcamp by General Assembly, and it's a reddit clone where you can ask questions and answer. It features categories portraying subreddits in reddit, and it also accepts media such as images.
